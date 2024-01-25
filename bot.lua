@@ -2,7 +2,7 @@ local discordia = require('discordia')
 local client = discordia.Client()
 
 local function cri(message)
-  local prefix = {"cri", "cry", "Cri", "Cry", "CRI", "CRY"}
+  local prefix = {"cri", "cry", "Cri", "Cry", "CRI", "CRY", "kri", "kry", "Kri", "Kry", "KRI", "KRY"}
   local j = nil
   for k=1, #prefix do
     local _, new_j = string.find(message, prefix[k])
