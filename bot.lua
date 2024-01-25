@@ -1,6 +1,32 @@
 local discordia = require('discordia')
 local client = discordia.Client()
 
+local function cehavl_word(word)
+    local word_table = {}
+    _ = word:gsub(".",function(c) table.insert(word_table,c) end)
+    for k = 1, #word_table-1 do
+        if (math.random() > 0.5) then
+            local c1 = word_table[k]
+            local c2 = word_table[k+1]
+            word_table[k] = c2
+            word_table[k+1] = c1
+        end
+    end
+    for k = #word_table-1, 2, -1 do
+        if (math.random() > 0.8) then
+            local c1 = word_table[k]
+            local c2 = word_table[k-1]
+            word_table[k] = c2
+            word_table[k-1] = c1
+        end
+    end
+    local result = ""
+    for k = 1, #word_table, 1 do
+        result = result..word_table[k]
+    end
+    return result
+end
+
 local function cri(message)
   local prefix = {"cri", "cry", "Cri", "Cry", "CRI", "CRY", "kri", "kry", "Kri", "Kry", "KRI", "KRY"}
   local j = nil
@@ -55,6 +81,10 @@ end)
 
 client:on('messageCreate', function(message)
   print(message.content)
+  local i, _ = string.find(message.content, "!c")
+  if (i == 1) then
+    message.channel:send(cehavl_word(message.content))
+  end
   local response = di(message.content)
   if response and (response ~= '') and (math.random() < 0.5) then
 		-- message.channel:send('<@'..message.author.id..'> '..response)
