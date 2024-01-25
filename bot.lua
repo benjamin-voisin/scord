@@ -83,7 +83,7 @@ client:on('messageCreate', function(message)
   print(message.content)
   local i, _ = string.find(message.content, "!c")
   if (i == 1) then
-    message.channel:send(cehavl_word(string.sub(message.content, 3, #message.content)))
+    message.channel:send(cehavl_word(string.sub(message.content, 4, #message.content)))
     return
   end
   local response = di(message.content)
