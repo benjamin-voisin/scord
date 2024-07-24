@@ -93,4 +93,14 @@ client:on('messageCreate', function(message)
 	end
 end)
 
-client:run('Bot ***REMOVED***')
+local token_file = io.open("./token.txt")
+if not token_file then
+	error("Token file \"token.txt\" not found, exiting...")
+	os.exit(1)
+end
+local token = token_file:read()
+token_file:close()
+
+local cmd = string.format("Bot %s", token)
+
+client:run(cmd)
